@@ -18,6 +18,16 @@ function App() {
     day: 'numeric'
   })
 
+  // Dynamic greeting based on time of day
+  const getGreeting = () => {
+    const hour = new Date().getHours()
+    if (hour < 12) return { text: 'Good Morning', emoji: '☀️' }
+    if (hour < 17) return { text: 'Good Afternoon', emoji: '🌤️' }
+    if (hour < 21) return { text: 'Good Evening', emoji: '🌆' }
+    return { text: 'Good Night', emoji: '🌙' }
+  }
+  const greeting = getGreeting()
+
   // Handlers for modal
   const handleOpenModal = (task = null) => {
     setTaskToEdit(task)
@@ -109,7 +119,7 @@ function App() {
               {today}
             </p>
             <h1 style={{ fontSize: '2.25rem', marginBottom: '0.5rem', letterSpacing: '-0.025em' }}>
-              Good Morning 👋
+              {greeting.text} {greeting.emoji}
             </h1>
             <p style={{ color: 'var(--text-tertiary)' }}>
               {stats.pending === 0
